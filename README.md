@@ -20,6 +20,8 @@ As the project grows, additional packages may be added to this workspace.
 ## Getting Started
 ### Prerequisites
 - Node.js (v18.20.3)
+
+- Node.js (v20.15.1)
 - pnpm (v9.4.0)
 ### Installation
 1. Clone the repository:
