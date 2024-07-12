@@ -30,6 +30,7 @@
     "typecheck": "pnpm run -r typecheck",
     "prepare": "husky"
   "lint-staged": {},
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -39,6 +40,7 @@
       "pre-commit": "lint-staged",
       "commit-msg": "commitlint --edit $1"
     }
+  },
   "engines": {
     "node": "20.15.1",
     "pnpm": "9.4.0"
