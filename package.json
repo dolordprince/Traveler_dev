@@ -30,6 +30,7 @@
     "typecheck": "pnpm run -r typecheck",
     "prepare": "husky"
   "lint-staged": {},
+    "typecheck": "pnpm run -r typecheck"
   },
   "commitlint": {
     "extends": [
