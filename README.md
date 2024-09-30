@@ -32,7 +32,7 @@ Before you begin, ensure you have the following installed:
 ## Setup
 1. Clone the repository (if you haven't already):
 ```bash
-git clone https://github.com/stackblitz/bolt.git
+git clone https://github.com/stackblitz/bolt.new.git
 ```
 2. Install dependencies:
 ```bash
