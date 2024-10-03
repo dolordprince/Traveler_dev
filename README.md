@@ -15,6 +15,8 @@ Welcome to the **Bolt** open-source repository! This repo provides everything yo
 Welcome to the **Bolt** open-source codebase! This repo provides everything you need to start building **AI-powered software development tools** powered by StackBlitz’s **WebContainer API**. 
 ### Why Build with Bolt + WebContainer API
 By building with the Bolt + WebContainer API you can create browser-based applications that let users **prompt, run, edit, and deploy** full-stack web apps directly in the browser, without the need for virtual machines. With WebContainer API, you can build apps that give AI direct access and full control over a **Node.js server**, **filesystem**, **package manager** and **dev terminal** inside your users browser tab. This powerful combination allows you to create a new class of development tools that support all major javascript libraries and node packages right out of the box, all without remote environments or local installs.
+[![Bolt Open Source Codebase](./public/social_preview_index.jpg)](https://bolt.new)
+> Welcome to the **Bolt** open-source codebase! This repo provides everything you need to start building **AI-powered software development tools** powered by StackBlitz’s **WebContainer API**.
 ### What’s the Difference Between Bolt (This Repo) and [Bolt.new](https://bolt.new)?
 - **Bolt.new**: This is the **commercial product** from StackBlitz—a hosted, browser-based AI development tool that enables users to prompt, run, edit, and deploy full-stack web applications directly in the browser. Built on top of the [Bolt open-source repo](https://github.com/stackblitz/bolt) and powered by the StackBlitz **WebContainer API**, it offers non-technical users the ability to create production-grade apps using AI.
 - **Bolt (This Repo)**: This open-source repository provides the building blocks behind **Bolt.new**. This package contains the UI interface for Bolt as well as the server components, built using [Remix Run](https://remix.run/). By leveraging this repo and StackBlitz’s **WebContainer API**, you can create your own AI-powered development tools and full-stack applications that run entirely in the browser. This code allows you to customize and expand use cases, integrating AI and WebContainers into your own unique applications.
@@ -36,7 +38,7 @@ the browser. WebContainers provide Bolt with a full-stack sandbox environment
 using [WebContainer API](https://webcontainers.io/api). WebContainers run full-
 stack applications directly in the browser without the cost and security
 concerns of cloud hosted AI agents. WebContainers are interactive and editable,
-and enables Bolt's AI to run code and understand any changes from the user. 
+and enables Bolt's AI to run code and understand any changes from the user.
 
 
 ### Remix App
@@ -63,6 +65,8 @@ As the project grows, additional packages may be added to this workspace.
 ## Getting Started
 ### Prerequisites
 - Node.js (v18.20.3)
+## Prerequisites
+Before you begin, ensure you have the following installed:
 
 - Node.js (v20.15.1)
 - pnpm (v9.4.0)
