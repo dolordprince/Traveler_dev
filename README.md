@@ -101,6 +101,7 @@ cd packages/bolt
 2. Start the development server:
 Optionally, you an set the debug level or disable authentication:
 Optionally, you an set the debug level:
+Optionally, you can set the debug level:
 
 VITE_LOG_LEVEL=debug
 VITE_DISABLE_AUTH=1
