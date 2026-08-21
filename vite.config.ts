@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      '@web': path.resolve(__dirname, './src'),
       '@': path.resolve(__dirname, './src'),
       '@vibe/ui': path.resolve(__dirname, './node_modules/@vibe/ui'),
       '@vibe/web-core': path.resolve(__dirname, './node_modules/@vibe/web-core'),
