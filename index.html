@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>traveler.dev</title>
+    <script>
+      window.addEventListener('error', function (e) {
+        var errDiv = document.getElementById('runtime-error-display');
+        if (!errDiv) {
+          errDiv = document.createElement('div');
+          errDiv.id = 'runtime-error-display';
+          errDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;background:#ff0033;color:#fff;padding:20px;z-index:99999;font-family:monospace;white-space:pre-wrap;';
+          document.body.appendChild(errDiv);
+        }
+        errDiv.innerText += '\n' + e.message + ' at ' + e.filename + ':' + e.lineno;
+      });
+    </script>
+      <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7c3aed">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="traveler.dev">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/app/entry/Bootstrap.tsx"></script>
+  
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("/sw.js", { scope: "/" })
+      .catch(function (error) {
+        console.error("traveler.dev service worker registration failed:", error);
+      });
+  });
+}
+</script>
+
+</body>
+</html>

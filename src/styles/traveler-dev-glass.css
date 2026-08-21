@@ -1,0 +1,104 @@
+:root {
+  --traveler-bg: #070512;
+  --traveler-bg-soft: #0c0820;
+  --traveler-surface: rgba(20, 15, 42, 0.62);
+  --traveler-surface-strong: rgba(27, 20, 56, 0.78);
+  --traveler-border: rgba(167, 139, 250, 0.20);
+  --traveler-border-strong: rgba(167, 139, 250, 0.34);
+  --traveler-primary: #8b5cf6;
+  --traveler-primary-soft: rgba(139, 92, 246, 0.18);
+  --traveler-secondary: #6366f1;
+  --traveler-text: #f5f3ff;
+  --traveler-text-muted: #b8b0d0;
+  --traveler-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  --traveler-blur: 22px;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at 12% 10%,
+      rgba(139, 92, 246, 0.18),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at 88% 12%,
+      rgba(99, 102, 241, 0.14),
+      transparent 30rem
+    ),
+    linear-gradient(
+      135deg,
+      var(--traveler-bg) 0%,
+      var(--traveler-bg-soft) 52%,
+      #090617 100%
+    );
+  color: var(--traveler-text);
+}
+
+.traveler-glass {
+  background: var(--traveler-surface);
+  border: 1px solid var(--traveler-border);
+  box-shadow: var(--traveler-shadow);
+  backdrop-filter: blur(var(--traveler-blur)) saturate(135%);
+  -webkit-backdrop-filter: blur(var(--traveler-blur)) saturate(135%);
+}
+
+.traveler-glass-strong {
+  background: var(--traveler-surface-strong);
+  border: 1px solid var(--traveler-border-strong);
+  box-shadow: var(--traveler-shadow);
+  backdrop-filter: blur(28px) saturate(145%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
+}
+
+.traveler-glass-border {
+  border: 1px solid var(--traveler-border);
+}
+
+.traveler-glass-button {
+  border: 1px solid var(--traveler-border);
+  background: rgba(139, 92, 246, 0.10);
+  color: var(--traveler-text);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.traveler-glass-button:hover {
+  background: rgba(139, 92, 246, 0.18);
+  border-color: var(--traveler-border-strong);
+  box-shadow: 0 10px 32px rgba(76, 29, 149, 0.20);
+}
+
+.traveler-glass-button:active {
+  transform: translateY(1px);
+}
+
+.traveler-brand {
+  color: var(--traveler-text);
+  letter-spacing: -0.025em;
+}
+
+.traveler-brand-accent {
+  color: var(--traveler-primary);
+}
+
+@supports not (
+  backdrop-filter: blur(1px)
+) {
+  .traveler-glass,
+  .traveler-glass-strong,
+  .traveler-glass-button {
+    background: #15102b;
+  }
+}
