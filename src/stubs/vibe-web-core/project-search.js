@@ -1,0 +1,2 @@
+import { z } from 'zod';
+export const projectSearchValidator = z.object({ q: z.string().optional() }).optional();

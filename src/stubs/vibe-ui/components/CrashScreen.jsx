@@ -1,0 +1,9 @@
+import React from 'react';
+export const CrashScreen = ({ error }) => (
+  React.createElement('div',
+    {style:{color:'white',background:'#0a0a0a',padding:40,fontFamily:'monospace'}},
+    React.createElement('h2', null, 'Something went wrong'),
+    React.createElement('pre', null, String(error?.message || error || 'Unknown error'))
+  )
+);
+export default CrashScreen;
