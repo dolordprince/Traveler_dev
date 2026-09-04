@@ -1,0 +1,25 @@
+{
+  "name": "ai-agent-workspace",
+  "version": "1.0.0",
+  "description": "Production Agent Gateway with OpenClaw Skills and Databricks Llama 3.3 70B Integration",
+  "main": "cli/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "start:gateway": "ts-node gateway/server.ts",
+    "cli": "ts-node cli/index.ts",
+    "install:skills": "node -e 'require(\"./tools/skills.ts\")' || true"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jszip": "^3.10.1",
+    "openai": "^4.33.0",
+    "quickjs-wasi": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

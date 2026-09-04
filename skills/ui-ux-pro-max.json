@@ -1,0 +1,12 @@
+{
+  "name": "skill_ui_ux_pro_max",
+  "package": "@xobi667/ui-ux-pro-max",
+  "description": "OpenClaw Skill: Advanced UI/UX layout design, component generation, and styling optimizations.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "componentSpec": { "type": "string", "description": "UI component specification or wireframe directive" }
+    },
+    "required": ["componentSpec"]
+  }
+}

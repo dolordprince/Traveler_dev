@@ -1,0 +1,14 @@
+{
+  "name": "skill_elite_longterm_memory",
+  "package": "@nextfrontierbuilds/elite-longterm-memory",
+  "description": "OpenClaw Skill: Vector-backed persistent state and long-term memory retrieval across sessions.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string", "enum": ["store", "recall", "search"] },
+      "key": { "type": "string" },
+      "value": { "type": "string" }
+    },
+    "required": ["action", "key"]
+  }
+}

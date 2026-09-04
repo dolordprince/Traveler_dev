@@ -1,0 +1,12 @@
+{
+  "name": "skill_glmv_prd_to_app",
+  "package": "@zai-org/glmv-prd-to-app",
+  "description": "OpenClaw Skill: Converts Product Requirement Documents (PRDs) into functional application scaffolding.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "prdDocument": { "type": "string", "description": "PRD content or file path containing system requirements" }
+    },
+    "required": ["prdDocument"]
+  }
+}

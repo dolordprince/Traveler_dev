@@ -1,0 +1,13 @@
+{
+  "name": "skill_code_engine",
+  "package": "@ivangdavila/code",
+  "description": "OpenClaw Skill: Multi-file code generation, refactoring, and static analysis execution.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "instruction": { "type": "string", "description": "Code refactoring or generation instruction" },
+      "targetFile": { "type": "string", "description": "File path to apply code modifications" }
+    },
+    "required": ["instruction"]
+  }
+}
