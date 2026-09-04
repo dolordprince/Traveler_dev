@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "destination": "https://agent-traveler-dev2.onrender.com/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "destination": "/frontend/$1"
+    }
+  ]
+}
