@@ -15,7 +15,7 @@ export class GLMLLMClient {
     const baseURL = process.env.TOKENROUTER_BASE_URL || config.glmBaseUrl;
 
     if (!apiKey || apiKey.length < 5) {
-      throw new Error('TOKENROUTER_API_KEY not set in .env');
+      throw new Error('TOKENROUTER_API_KEY environment variable is not configured.');
     }
 
     return new OpenAI({
