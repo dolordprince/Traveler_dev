@@ -9,6 +9,28 @@ export interface ChatMessage {
   tool_calls?: any[];
 }
 
+function errorDetails(err: any): string {
+  const details: string[] = [];
+
+  if (err?.name) details.push(`name=${String(err.name)}`);
+  if (err?.code) details.push(`code=${String(err.code)}`);
+  if (err?.errno) details.push(`errno=${String(err.errno)}`);
+  if (err?.syscall) details.push(`syscall=${String(err.syscall)}`);
+  if (err?.address) details.push(`address=${String(err.address)}`);
+  if (err?.port) details.push(`port=${String(err.port)}`);
+  if (err?.type) details.push(`type=${String(err.type)}`);
+
+  if (err?.cause) {
+    if (err.cause.name) details.push(`cause_name=${String(err.cause.name)}`);
+    if (err.cause.code) details.push(`cause_code=${String(err.cause.code)}`);
+    if (err.cause.errno) details.push(`cause_errno=${String(err.cause.errno)}`);
+    if (err.cause.syscall) details.push(`cause_syscall=${String(err.cause.syscall)}`);
+    if (err.cause.message) details.push(`cause=${String(err.cause.message)}`);
+  }
+
+  return details.join(' ');
+}
+
 export class GLMLLMClient {
   private getClient(): OpenAI {
     const apiKey = process.env.TOKENROUTER_API_KEY || config.glmApiKey;
@@ -21,13 +43,7 @@ export class GLMLLMClient {
     return new OpenAI({
       apiKey,
       baseURL,
-
-      // GLM-5.3 reasoning responses can legitimately take tens of seconds.
-      // Keep the request bounded, but allow enough time for a real completion.
       timeout: 120_000,
-
-      // We implement explicit retries below so the retry policy is visible
-      // and limited to transient upstream failures.
       maxRetries: 0,
     });
   }
@@ -37,6 +53,7 @@ export class GLMLLMClient {
     toolsSchema?: any[]
   ): Promise<OpenAI.Chat.Completions.ChatCompletion> {
     const client = this.getClient();
+    const baseURL = process.env.TOKENROUTER_BASE_URL || config.glmBaseUrl;
     const model = process.env.TOKENROUTER_MODEL || config.glmModel;
 
     const payload: OpenAI.Chat.Completions.ChatCompletionCreateParams = {
@@ -60,14 +77,15 @@ export class GLMLLMClient {
 
         console.error(
           `[GLM] request start attempt=${attempt}/${maxAttempts} ` +
-          `messages=${messages.length} tools=${toolsSchema?.length || 0} ` +
-          `model=${model}`
+          `messages=${messages.length} ` +
+          `tools=${toolsSchema?.length || 0} ` +
+          `model=${model} ` +
+          `baseURL=${baseURL}`
         );
 
         const response = await client.chat.completions.create(payload);
 
         const elapsed = ((Date.now() - started) / 1000).toFixed(2);
-
         const debugChoice = response.choices?.[0];
         const debugMsg = debugChoice?.message as any;
 
@@ -83,15 +101,6 @@ export class GLMLLMClient {
 
         if (choice?.message) {
           const msg = choice.message as any;
-
-          /*
-           * GLM-5.3 may return reasoning_content while content is null/empty.
-           *
-           * For tool calls, preserve the tool-call structure and only use
-           * reasoning_content as fallback content when there is no tool call.
-           * This prevents reasoning text from being treated as normal assistant
-           * output when GLM has actually requested a tool.
-           */
           const hasToolCalls =
             Array.isArray(msg.tool_calls) && msg.tool_calls.length > 0;
 
@@ -111,16 +120,46 @@ export class GLMLLMClient {
         return response;
       } catch (err: any) {
         const status =
-          err?.status ||
-          err?.statusCode ||
-          err?.response?.status ||
+          err?.status ??
+          err?.statusCode ??
+          err?.response?.status ??
+          err?.cause?.status ??
           '???';
 
         const body =
-          err?.error?.message ||
-          err?.response?.data?.error?.message ||
-          err?.message ||
+          err?.error?.message ??
+          err?.response?.data?.error?.message ??
+          err?.response?.data?.message ??
+          err?.message ??
           String(err);
+
+        const details = errorDetails(err);
+
+        console.error(
+          `[GLM] attempt=${attempt}/${maxAttempts} ` +
+          `status=${status} ` +
+          `model=${model} ` +
+          `body=${String(body).slice(0, 500)} ` +
+          `${details}`
+        );
+
+        if (err?.cause) {
+          console.error(
+            `[GLM] underlying cause: ${JSON.stringify(
+              {
+                name: err.cause?.name,
+                message: err.cause?.message,
+                code: err.cause?.code,
+                errno: err.cause?.errno,
+                syscall: err.cause?.syscall,
+                address: err.cause?.address,
+                port: err.cause?.port,
+              },
+              null,
+              2
+            )}`
+          );
+        }
 
         const transient =
           status === 408 ||
@@ -131,14 +170,9 @@ export class GLMLLMClient {
           status === 503 ||
           status === 504;
 
-        console.error(
-          `[GLM] attempt=${attempt}/${maxAttempts} status=${status} ` +
-          `model=${model} body=${String(body).slice(0, 300)}`
-        );
-
         if (!transient || attempt >= maxAttempts) {
           throw new Error(
-            `GLM Failure [${status}] (${model}): ${String(body)}`
+            `GLM Failure [${status}] (${model}): ${String(body)}${details ? ` | ${details}` : ''}`
           );
         }
 
@@ -152,6 +186,8 @@ export class GLMLLMClient {
       }
     }
 
-    throw new Error(`GLM Failure: exhausted retry attempts (${model})`);
+    throw new Error(
+      `GLM Failure: exhausted retry attempts (${model})`
+    );
   }
 }
