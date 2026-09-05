@@ -33,11 +33,20 @@ function errorDetails(err: any): string {
 
 export class GLMLLMClient {
   private getClient(): OpenAI {
-    const apiKey = process.env.TOKENROUTER_API_KEY || config.glmApiKey;
-    const baseURL = process.env.TOKENROUTER_BASE_URL || config.glmBaseUrl;
+    const rawApiKey = process.env.TOKENROUTER_API_KEY || config.glmApiKey;
+    const apiKey = rawApiKey?.trim();
+    const baseURL = (process.env.TOKENROUTER_BASE_URL || config.glmBaseUrl).trim();
 
     if (!apiKey || apiKey.length < 5) {
       throw new Error('TOKENROUTER_API_KEY environment variable is not configured.');
+    }
+
+    if (/[\\r\\n]/.test(apiKey)) {
+      throw new Error('TOKENROUTER_API_KEY contains an invalid newline character.');
+    }
+
+    if (/[^\\x20-\\x7E]/.test(apiKey)) {
+      throw new Error('TOKENROUTER_API_KEY contains invalid control characters.');
     }
 
     return new OpenAI({
