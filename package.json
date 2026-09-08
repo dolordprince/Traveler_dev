@@ -73,7 +73,8 @@
     "remark-gfm": "^4.0.0",
     "remix-utils": "^7.6.0",
     "shiki": "^1.9.1",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "sass": "^1.77.6"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240620.0",
