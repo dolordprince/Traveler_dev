@@ -116,7 +116,7 @@ export class FilesStore {
   async #init() {
     const webcontainer = await this.#webcontainer;
 
-    webcontainer.internal.watchPaths(
+    webcontainer.watchPaths(
       { include: [`${WORK_DIR}/**`], exclude: ['**/node_modules', '.git'], includeContent: true },
       bufferWatchEvents(100, this.#processEventBuffer.bind(this)),
     );

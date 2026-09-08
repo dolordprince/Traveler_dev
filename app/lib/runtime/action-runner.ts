@@ -128,9 +128,7 @@ export class ActionRunner {
 
     const webcontainer = await this.#webcontainer;
 
-    const process = await webcontainer.spawn('jsh', ['-c', action.content], {
-      env: { npm_config_yes: true },
-    });
+    const process = await webcontainer.spawn('jsh', ['-c', action.content]);
 
     action.abortSignal.addEventListener('abort', () => {
       process.kill();
