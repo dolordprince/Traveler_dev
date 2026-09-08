@@ -2,7 +2,7 @@ services:
   - type: web
     name: traveler-dev
     runtime: node
-    buildCommand: npm install && npm run build:gateway
+    buildCommand: npm install && npx tsc --project tsconfig.gateway.json
     startCommand: node dist/gateway/studio.js
     envVars:
       - key: NODE_VERSION
