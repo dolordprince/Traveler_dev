@@ -1,28 +1,31 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ES2024",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "lib": ["ES2022"],
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "strict": false,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": []
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "types": ["vite/client", "node"]
   },
-  "include": [
-    "app/**/*",
-    "gateway/**/*",
-    "tools/**/*",
-    "config/**/*",
-    "load-context.ts"
-  ],
+  "include": ["app/**/*"],
   "exclude": [
     "node_modules",
     "packages",
     "frontend",
+    "gateway",
+    "tools",
+    "config",
     "dist",
-    "build"
+    "build",
+    "load-context.ts",
+    "vite.config.ts",
+    "uno.config.ts"
   ]
 }
