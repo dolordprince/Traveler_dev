@@ -2,8 +2,8 @@ services:
   - type: web
     name: traveler-dev
     runtime: node
-    buildCommand: npm install && npm run build
-    startCommand: node server.js
+    buildCommand: npm install && npm run build:gateway
+    startCommand: node dist/gateway/studio.js
     envVars:
       - key: NODE_VERSION
         value: 20
@@ -11,5 +11,3 @@ services:
         value: production
       - key: PORT
         value: 3000
-      - key: FASTAPI_URL
-        value: https://cdworkspace-ai-backend.onrender.com

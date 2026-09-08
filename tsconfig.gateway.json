@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "rootDir": ".",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": false
+  },
+  "include": [
+    "gateway/**/*",
+    "core/**/*",
+    "tools/**/*",
+    "config/**/*",
+    "llm/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "app",
+    "frontend",
+    "packages",
+    "build",
+    "dist"
+  ]
+}
