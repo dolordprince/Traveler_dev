@@ -45,3 +45,8 @@ dist-ssr
 *.vars
 .wrangler
 _worker.bundle
+
+# Source maps (too large for git)
+*.js.map
+*.css.map
+public/assets/
