@@ -3,7 +3,13 @@ services:
     name: traveler-dev
     runtime: node
     buildCommand: npm install && npm run build
-    startCommand: npm start
+    startCommand: node server.js
     envVars:
       - key: NODE_VERSION
         value: 20
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: FASTAPI_URL
+        value: https://cdworkspace-ai-backend.onrender.com

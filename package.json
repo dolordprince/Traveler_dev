@@ -14,7 +14,7 @@
     "test:watch": "vitest",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "start": "bindings=$(./bindings.sh) && wrangler pages dev ./build/client $bindings",
+    "start": "node server.js",
     "typecheck": "tsc",
     "typegen": "wrangler types",
     "preview": "pnpm run build && pnpm run start"
@@ -74,7 +74,12 @@
     "remix-utils": "^7.6.0",
     "shiki": "^1.9.1",
     "unist-util-visit": "^5.0.0",
-    "sass": "^1.77.6"
+    "sass": "^1.77.6",
+    "express": "^4.19.2",
+    "@remix-run/express": "^2.10.0",
+    "compression": "^1.7.4",
+    "morgan": "^1.10.0",
+    "http-proxy-middleware": "^3.0.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240620.0",
